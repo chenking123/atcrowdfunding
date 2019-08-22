@@ -1,5 +1,7 @@
 package com.atguigu.atcrowdfunfing.manager.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +13,8 @@ import com.atguigu.atcrowdfunfing.bean.User;
 import com.atguigu.atcrowdfunfing.exception.LoginFailException;
 import com.atguigu.atcrowdfunfing.manager.dao.UserMapper;
 import com.atguigu.atcrowdfunfing.manager.service.UserService;
+import com.atguigu.atcrowdfunfing.util.Const;
+import com.atguigu.atcrowdfunfing.util.MD5Util;
 import com.atguigu.atcrowdfunfing.util.Page;
 
 @Service
@@ -51,6 +55,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int saveUser(User user) {
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date =new Date();
+		String createtime=sdf.format(date);
+		user.setCreatetime(createtime);
+		
+		user.setUserpswd(MD5Util.digest(Const.PASSWORD));
+		
 		return userMapper.insert(user);
 	}
 
@@ -71,6 +82,35 @@ public class UserServiceImpl implements UserService {
 		page.setTotalsize(count);
 
 		return page;
+	}
+
+	@Override
+	public User getUserById(Integer id) {
+		
+		return userMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public int updateUser(User user) {
+		return userMapper.updateByPrimaryKey(user);
+	}
+
+	@Override
+	public int deleteUser(Integer id) {
+		return userMapper.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public int deleteBeachUser(Integer[] ids) {
+		int totalcount=0;
+		for (Integer id : ids) {
+			int count=userMapper.deleteByPrimaryKey(id);
+			totalcount+=count;
+		}
+		if(totalcount!=ids.length) {
+			throw new RuntimeException("批量删除失败");
+		}
+		return totalcount;
 	}
 
 }
