@@ -2,7 +2,11 @@ package com.atguigu.atcrowdfunfing.manager.dao;
 
 import com.atguigu.atcrowdfunfing.bean.Role;
 import com.atguigu.atcrowdfunfing.bean.RoleExample;
+import com.atguigu.atcrowdfunfing.bean.User;
+
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface RoleMapper {
@@ -27,4 +31,8 @@ public interface RoleMapper {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+
+	List<User> querList(Map<String, Object> paramMap);
+
+	Integer queryCount(Map<String, Object> paramMap);
 }

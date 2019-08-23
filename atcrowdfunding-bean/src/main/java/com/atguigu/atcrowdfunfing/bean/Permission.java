@@ -1,53 +1,77 @@
 package com.atguigu.atcrowdfunfing.bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Permission {
-    private Integer id;
+	private Integer id;
 
-    private Integer pid;
+	private Integer pid;
 
-    private String name;
+	private String name;
 
-    private String icon;
+	private String icon;
 
-    private String url;
+	private String url;
 
-    public Integer getId() {
-        return id;
-    }
+	private boolean open;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	private List<Permission> children = new ArrayList<Permission>();
 
-    public Integer getPid() {
-        return pid;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setPid(Integer pid) {
-        this.pid = pid;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public Integer getPid() {
+		return pid;
+	}
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+	public void setPid(Integer pid) {
+		this.pid = pid;
+	}
 
-    public String getIcon() {
-        return icon;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setIcon(String icon) {
-        this.icon = icon == null ? null : icon.trim();
-    }
+	public void setName(String name) {
+		this.name = name == null ? null : name.trim();
+	}
 
-    public String getUrl() {
-        return url;
-    }
+	public String getIcon() {
+		return icon;
+	}
 
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
-    }
+	public void setIcon(String icon) {
+		this.icon = icon == null ? null : icon.trim();
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url == null ? null : url.trim();
+	}
+
+	public boolean isOpen() {
+		return open;
+	}
+
+	public void setOpen(boolean open) {
+		this.open = open;
+	}
+
+	public List<Permission> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<Permission> children) {
+		this.children = children;
+	}
+
 }

@@ -208,4 +208,17 @@
       url = #{url,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="queryAllPermission" resultMap="BaseResultMap">
+  	select * from t_permission
+  </select>
+  
+  <select id="getRootPermission" resultMap="BaseResultMap">
+  	select * from t_permission where pid = 0
+  </select>
+  
+  <select id="getChildrenPermissionById" parameterType="int" resultMap="BaseResultMap">
+  	select * from t_permission where pid = #{id}
+  </select>
+  
 </mapper>

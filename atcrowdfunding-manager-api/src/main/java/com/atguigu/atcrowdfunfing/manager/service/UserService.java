@@ -1,9 +1,12 @@
 package com.atguigu.atcrowdfunfing.manager.service;
 
+import java.util.List;
 import java.util.Map;
 
+import com.atguigu.atcrowdfunfing.bean.Role;
 import com.atguigu.atcrowdfunfing.bean.User;
 import com.atguigu.atcrowdfunfing.util.Page;
+import com.atguigu.atcrowdfunfing.vo.Data;
 
 public interface UserService {
 
@@ -22,4 +25,14 @@ public interface UserService {
 	int deleteUser(Integer id);
 
 	int deleteBeachUser(Integer[] ids);
+
+	int deleteBeachUserByVo(Data data);
+
+	List<Role> querAllRole();
+
+	List<Integer> queryRoleById(Integer id);
+
+	int saveUserRoleRelationship(Integer userid, Data data);
+
+	int deleteUserRoleRelationship(Integer userid, Data data);
 }

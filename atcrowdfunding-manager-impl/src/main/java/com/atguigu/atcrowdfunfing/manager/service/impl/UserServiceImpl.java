@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.atguigu.atcrowdfunfing.bean.Role;
 import com.atguigu.atcrowdfunfing.bean.User;
 import com.atguigu.atcrowdfunfing.exception.LoginFailException;
 import com.atguigu.atcrowdfunfing.manager.dao.UserMapper;
@@ -16,6 +17,7 @@ import com.atguigu.atcrowdfunfing.manager.service.UserService;
 import com.atguigu.atcrowdfunfing.util.Const;
 import com.atguigu.atcrowdfunfing.util.MD5Util;
 import com.atguigu.atcrowdfunfing.util.Page;
+import com.atguigu.atcrowdfunfing.vo.Data;
 
 @Service
 @Transactional
@@ -111,6 +113,36 @@ public class UserServiceImpl implements UserService {
 			throw new RuntimeException("批量删除失败");
 		}
 		return totalcount;
+	}
+
+	@Override
+	public int deleteBeachUserByVo(Data data) {
+		
+		return userMapper.deleteBeachUserByVo(data);
+	}
+
+	@Override
+	public List<Role> querAllRole() {
+		// TODO Auto-generated method stub
+		return userMapper.querAllRole();
+	}
+
+	@Override
+	public List<Integer> queryRoleById(Integer id) {
+		// TODO Auto-generated method stub
+		return userMapper.queryRoleById(id);
+	}
+
+	@Override
+	public int saveUserRoleRelationship(Integer userid, Data data) {
+		// TODO Auto-generated method stub
+		return userMapper.saveUserRoleRelationship(userid,data);
+	}
+
+	@Override
+	public int deleteUserRoleRelationship(Integer userid, Data data) {
+		// TODO Auto-generated method stub
+		return userMapper.deleteUserRoleRelationship(userid,data);
 	}
 
 }

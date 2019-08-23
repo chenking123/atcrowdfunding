@@ -283,7 +283,37 @@
 		<where>
 			<if test="queryText!=null">loginacct like concat("%",#{queryText},"%")</if>
 		</where>
-
 	</select>
+
+	<delete id="deleteBeachUserByVo">
+		delete from t_user
+		where id in
+		<foreach collection="datas" open="(" close=")" separator="," item="user">
+			#{user.id}
+		</foreach>
+	</delete>
+	
+	<select id="querAllRole" resultType="role">
+		select * from t_role;
+	</select>
+	<select id="queryRoleById" parameterType="Integer" resultType="Integer">
+		select roleid from t_user_role where userid=#{id}
+	</select>
+
+	<insert id="saveUserRoleRelationship">
+	
+		<foreach collection="data.ids" item="roleid" separator=";">
+			insert into t_user_role(userid,roleid) value(#{userid},#{roleid})
+		</foreach>
+		
+	</insert>
+	
+	<delete id="deleteUserRoleRelationship" >
+		delete from t_user_role
+		where userid=#{userid} and roleid in
+		<foreach collection="data.ids" item="roleid" open="(" close=")" separator=",">
+			#{roleid}
+		</foreach>
+	</delete>
 
 </mapper>
