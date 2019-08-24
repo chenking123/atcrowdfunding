@@ -1,7 +1,10 @@
 package com.atguigu.atcrowdfunfing.controller;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.atguigu.atcrowdfunfing.bean.Permission;
 import com.atguigu.atcrowdfunfing.bean.User;
 import com.atguigu.atcrowdfunfing.manager.service.UserService;
 import com.atguigu.atcrowdfunfing.util.AjaxResult;
@@ -53,6 +57,45 @@ public class DispatcherController {
 
 			User user = userService.queryUserlogin(paramMap);
 			session.setAttribute(Const.LOGIN_USER, user);
+			
+			//------------------------------------------
+			// 加载当前用户所拥有的的权限
+
+			//User user = (User) session.getAttribute(Const.LOGIN_USER);
+
+			List<Permission> myPermissions = userService.queryPermissionByUserid(user.getId());
+
+			Permission permissionRoot = null;
+
+			Map<Integer, Permission> map = new HashMap<Integer, Permission>();
+
+			Set<String> myUris = new HashSet<String>();
+			
+			for (Permission innerpermission : myPermissions) {
+				map.put(innerpermission.getId(), innerpermission);
+				
+				myUris.add("/"+innerpermission.getUrl());
+			}
+			
+			session.setAttribute(Const.MY_URIS, myUris);
+			
+			for (Permission permission : myPermissions) { // 100
+				// 通过子查找父
+				// 子菜单
+				Permission child = permission; // 假设为子菜单
+				if (child.getPid() == 0) {
+					permissionRoot = permission;
+				} else {
+					// 父节点
+					Permission parent = map.get(child.getPid());
+					parent.getChildren().add(child);
+				}
+			}
+
+			session.setAttribute("permissionRoot", permissionRoot);
+			
+			
+			
 			result.setSuccess(true);
 			// {"result":"true"}
 		} catch (Exception e) {
@@ -79,11 +122,14 @@ public class DispatcherController {
 
 	@RequestMapping("/main.htm")
 	public String main() {
+		
+
 		return "main";
 	}
+
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session) {
-		session.invalidate();//销毁session对象
+		session.invalidate();// 销毁session对象
 		return "redirect:index.htm";
 	}
 }

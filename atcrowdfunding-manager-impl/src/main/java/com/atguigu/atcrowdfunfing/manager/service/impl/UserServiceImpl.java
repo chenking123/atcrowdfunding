@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.atguigu.atcrowdfunfing.bean.Permission;
 import com.atguigu.atcrowdfunfing.bean.Role;
 import com.atguigu.atcrowdfunfing.bean.User;
 import com.atguigu.atcrowdfunfing.exception.LoginFailException;
@@ -143,6 +144,12 @@ public class UserServiceImpl implements UserService {
 	public int deleteUserRoleRelationship(Integer userid, Data data) {
 		// TODO Auto-generated method stub
 		return userMapper.deleteUserRoleRelationship(userid,data);
+	}
+
+	@Override
+	public List<Permission> queryPermissionByUserid(Integer id) {
+		// TODO Auto-generated method stub
+		return userMapper.queryPermissionByUserid(id);
 	}
 
 }

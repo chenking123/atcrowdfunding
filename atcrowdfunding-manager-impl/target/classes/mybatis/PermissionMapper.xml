@@ -202,9 +202,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.atguigu.atcrowdfunfing.bean.Permission" >
     update t_permission
-    set pid = #{pid,jdbcType=INTEGER},
-      name = #{name,jdbcType=VARCHAR},
-      icon = #{icon,jdbcType=VARCHAR},
+    set name = #{name,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -220,5 +218,10 @@
   <select id="getChildrenPermissionById" parameterType="int" resultMap="BaseResultMap">
   	select * from t_permission where pid = #{id}
   </select>
+  <select id="queryPermissionByRoleid" parameterType="int" resultType="int">
+  	select permissionid from t_role_permission where roleid = #{roleid}
+  </select>
+  
+  
   
 </mapper>

@@ -1,5 +1,6 @@
 package com.atguigu.atcrowdfunfing.manager.dao;
 
+import com.atguigu.atcrowdfunfing.bean.Permission;
 import com.atguigu.atcrowdfunfing.bean.Role;
 import com.atguigu.atcrowdfunfing.bean.User;
 import com.atguigu.atcrowdfunfing.bean.UserExample;
@@ -53,4 +54,6 @@ public interface UserMapper {
 	int saveUserRoleRelationship(@Param("userid") Integer userid, @Param("data") Data data);
 
 	int deleteUserRoleRelationship(@Param("userid") Integer userid, @Param("data") Data data);
+
+	List<Permission> queryPermissionByUserid(Integer id);
 }

@@ -2,6 +2,7 @@ package com.atguigu.atcrowdfunfing.manager.dao;
 
 import com.atguigu.atcrowdfunfing.bean.Role;
 import com.atguigu.atcrowdfunfing.bean.RoleExample;
+import com.atguigu.atcrowdfunfing.bean.RolePermission;
 import com.atguigu.atcrowdfunfing.bean.User;
 
 import java.util.List;
@@ -35,4 +36,8 @@ public interface RoleMapper {
 	List<User> querList(Map<String, Object> paramMap);
 
 	Integer queryCount(Map<String, Object> paramMap);
+
+	void deleteRolePermissionRelationship(Integer roleid);
+
+	int insertRolePermission(RolePermission rp);
 }

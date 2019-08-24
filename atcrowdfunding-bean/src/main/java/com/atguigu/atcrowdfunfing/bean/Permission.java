@@ -12,6 +12,10 @@ public class Permission {
 
 	private String icon;
 
+	private Integer level;
+
+	private boolean checked;
+
 	private String url;
 
 	private boolean open;
@@ -72,6 +76,22 @@ public class Permission {
 
 	public void setChildren(List<Permission> children) {
 		this.children = children;
+	}
+
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
+	public boolean isChecked() {
+		return checked;
+	}
+
+	public void setChecked(boolean checked) {
+		this.checked = checked;
 	}
 
 }

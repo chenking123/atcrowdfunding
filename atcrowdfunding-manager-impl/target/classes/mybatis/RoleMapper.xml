@@ -195,6 +195,14 @@
 			<if test="queryText!=null">name like concat("%",#{queryText},"%")</if>
 		</where>
 	</select>
+	
+	<delete id="deleteRolePermissionRelationship">
+		delete from t_role_permission where roleid=#{roleid}
+	</delete>
+	
+	<insert id="insertRolePermission">
+		insert into t_role_permission(roleid,permissionid) value(#{roleid},#{permissionid})
+	</insert>
 
 
 

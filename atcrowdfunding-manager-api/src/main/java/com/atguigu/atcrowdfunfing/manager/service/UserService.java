@@ -3,6 +3,7 @@ package com.atguigu.atcrowdfunfing.manager.service;
 import java.util.List;
 import java.util.Map;
 
+import com.atguigu.atcrowdfunfing.bean.Permission;
 import com.atguigu.atcrowdfunfing.bean.Role;
 import com.atguigu.atcrowdfunfing.bean.User;
 import com.atguigu.atcrowdfunfing.util.Page;
@@ -35,4 +36,6 @@ public interface UserService {
 	int saveUserRoleRelationship(Integer userid, Data data);
 
 	int deleteUserRoleRelationship(Integer userid, Data data);
+
+	List<Permission> queryPermissionByUserid(Integer id);
 }
