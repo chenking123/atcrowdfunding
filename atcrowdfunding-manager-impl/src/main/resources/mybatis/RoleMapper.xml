@@ -110,8 +110,8 @@
 	</delete>
 	<insert id="insert"
 		parameterType="com.atguigu.atcrowdfunfing.bean.Role">
-		insert into t_role (id, name)
-		values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
+		insert into t_role (name)
+		values (#{name,jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertSelective"
 		parameterType="com.atguigu.atcrowdfunfing.bean.Role">
@@ -204,6 +204,13 @@
 		insert into t_role_permission(roleid,permissionid) value(#{roleid},#{permissionid})
 	</insert>
 
+	<delete id="doDeleteRoleByVo">
+		delete from t_role
+		where id in
+		<foreach collection="datas" open="(" close=")" separator="," item="role">
+			#{role.id}
+		</foreach>
+	</delete>
 
 
 </mapper>

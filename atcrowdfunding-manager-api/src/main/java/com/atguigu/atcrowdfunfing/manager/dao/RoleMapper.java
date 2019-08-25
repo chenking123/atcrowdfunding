@@ -4,6 +4,7 @@ import com.atguigu.atcrowdfunfing.bean.Role;
 import com.atguigu.atcrowdfunfing.bean.RoleExample;
 import com.atguigu.atcrowdfunfing.bean.RolePermission;
 import com.atguigu.atcrowdfunfing.bean.User;
+import com.atguigu.atcrowdfunfing.vo.Data;
 
 import java.util.List;
 import java.util.Map;
@@ -40,4 +41,6 @@ public interface RoleMapper {
 	void deleteRolePermissionRelationship(Integer roleid);
 
 	int insertRolePermission(RolePermission rp);
+
+	int doDeleteRoleByVo(Data data);
 }
